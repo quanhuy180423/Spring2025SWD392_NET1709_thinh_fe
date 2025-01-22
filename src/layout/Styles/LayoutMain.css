@@ -1,0 +1,23 @@
+/* LayoutAuth.css */
+.layout-auth {
+    position: relative;
+    min-height: 100vh; /* Đảm bảo chiều cao là toàn bộ màn hình */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .layout-auth-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("https://i.pinimg.com/736x/86/ec/b9/86ecb9603d0f65a098059b21a8c6f64f.jpg");
+    background-position: center; /* Căn giữa hình ảnh */
+    opacity: 0.3; /* Đặt độ mờ cho background */
+    z-index: 0; /* Đảm bảo background ở dưới cùng */
+  }
+  
+
+  
