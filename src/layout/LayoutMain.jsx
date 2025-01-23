@@ -4,7 +4,7 @@ import Header from "../components/Header"
 const LayoutMain = () => {
     return (
         <div>
-            <header className="bg-slate-400">
+            <header >
                 <Header />
             </header>
             <Outlet />

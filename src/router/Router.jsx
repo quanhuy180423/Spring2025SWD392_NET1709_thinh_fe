@@ -5,6 +5,7 @@ import LayoutAuth from "@layouts/LayoutAuth";
 import LoginPage from "@pages/LoginPage";
 import RegisterPage from "@pages/RegitserPage";
 import routes from ".";
+import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
 
 const Router = createBrowserRouter([
   {
@@ -12,9 +13,8 @@ const Router = createBrowserRouter([
     element: <LayoutMain />,
     children:
       [
-        {
-          path: "", element: <HomePage />,
-        }
+        { path: "", element: <HomePage /> },
+        { path: '/register-for-vaccination', element: <RegisterVaccinationPage /> }
       ]
   },
   {

@@ -1,26 +1,49 @@
-import { Outlet } from 'react-router-dom';
-import './Styles/LayoutMain.css'; // Import file CSS
-
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import './Styles/LayoutMain.css';
+import logoApp from '../assets/logoMedicince.png';
+import routes from '@src/router';
 const LayoutAuth = () => {
+    const location = useLocation(); // Lấy vị trí hiện tại để theo dõi đường dẫn
+
     return (
         <div className="layout-auth">
             {/* Background */}
             <div className="layout-auth-bg"></div>
 
-            {/* Form Container */}
-            <div className="max-h-4/5  md:w-3/5 bg-white p-8 rounded-lg my-5 z-10 relative">
-                <div className="flex flex-col md:flex-row">
-                    <div className="basis-1/2 mr-0 md:mr-3 flex items-center justify-center">
+
+
+            <div className='flex flex-col items-center'>
+                {/* Logo */}
+                <div className="logo-container">
+                    <Link to={routes.home}>
+                        <img src={logoApp} alt="App Logo" className="logo-app" />
+                    </Link>
+
+                </div>
+
+                {/* Form Container */}
+                <div className="max-h-4/5 md:h-4/5 md:w-4/5 bg-white p-4 px-4 rounded-lg my-2 z-10 relative shadow-2xl">
+                    <div>
                         <div className="w-full">
-                            <Outlet /> {/* Hiển thị các trang con */}
+                            {/* AnimatePresence để xử lý animation khi chuyển trang */}
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={location.pathname} // Đảm bảo animation chạy khi đường dẫn thay đổi
+                                    initial={{ x: 300, opacity: 0 }} // Vị trí và trạng thái ban đầu
+                                    animate={{ x: 0, opacity: 1 }} // Animation khi hiển thị
+                                    exit={{ x: -300, opacity: 0 }} // Animation khi rời đi
+                                    transition={{ duration: 0.5 }} // Thời gian chuyển đổi
+                                    className="h-full w-full"
+                                >
+                                    <Outlet /> {/* Hiển thị các trang con */}
+                                </motion.div>
+                            </AnimatePresence>
                         </div>
-                    </div>
-                    <div className="basis-1/2 hidden md:flex justify-center items-center">
-                        {/* Chỗ này có thể để hình ảnh khác hoặc bỏ trống */}
-                        <img src="https://i.pinimg.com/736x/10/86/27/1086271be4aff93bbc3d704be022231a.jpg" alt="thumnail" />
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };

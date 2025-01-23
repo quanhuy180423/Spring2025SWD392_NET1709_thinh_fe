@@ -19,5 +19,18 @@
     z-index: 0; /* Đảm bảo background ở dưới cùng */
   }
   
+/* Logo Container */
+.logo-container {
+  background-color: white;
 
+
+}
+
+/* Logo Style */
+.logo-app {
+  width: 150px; /* Đặt kích thước cho logo */
+  height: auto; /* Giữ tỷ lệ gốc */
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.2)); /* Thêm bóng để nổi bật hơn */
+  border-radius: 50%;
+}
   
