@@ -18,8 +18,8 @@ const Header = () => {
                 <div className='flex items-center cursor-pointer'>
                     <ul className='list-none flex flex-row gap-6'>
                         <li className='text-xl'><Link to={routes.home}>Home</Link></li>
-                        <li className='text-xl'>Guide</li>
-                        <li className='text-xl'>Services</li>
+                        <li className='text-xl'><Link to={routes.vaccinationGuide}>Guide</Link></li>
+                        <li className='text-xl'><Link to={routes.service}>Services</Link></li>
                         <li className='text-xl'>Price List</li>
                         <li className='text-xl'>About Us</li>
                     </ul>

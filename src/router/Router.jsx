@@ -6,6 +6,8 @@ import LoginPage from "@pages/LoginPage";
 import RegisterPage from "@pages/RegitserPage";
 import routes from ".";
 import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
+import VaccinationGuidePage from "@pages/VaccinationGuide";
+import Counter from "@components/test/Counter";
 
 const Router = createBrowserRouter([
   {
@@ -14,7 +16,9 @@ const Router = createBrowserRouter([
     children:
       [
         { path: "", element: <HomePage /> },
-        { path: '/register-for-vaccination', element: <RegisterVaccinationPage /> }
+        { path: '/register-for-vaccination', element: <RegisterVaccinationPage /> },
+        { path: '/vaccination-guide', element: <VaccinationGuidePage /> },
+        { path: '/services', element: <Counter /> }
       ]
   },
   {
