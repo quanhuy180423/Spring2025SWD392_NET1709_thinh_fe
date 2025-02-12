@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "module": "Node16",
+        "moduleResolution": "node16",
         "target": "ES2022",
+        "allowJs": true,
         "jsx": "react",
         "allowImportingTsExtensions": true,
+        "noEmit": true,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
+        "baseUrl": "./",
         "paths": {
             "@pages/*": [
                 "src/page/*"
@@ -31,6 +34,9 @@
             ]
         }
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "node_modules",
         "**/node_modules/*"
