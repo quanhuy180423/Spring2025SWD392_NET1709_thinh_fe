@@ -23,6 +23,7 @@ const Header = () => {
                 <Navigation />
             </div>
 
+
             {/* User Actions */}
             <div className="hidden md:flex">
                 <UserActions />
