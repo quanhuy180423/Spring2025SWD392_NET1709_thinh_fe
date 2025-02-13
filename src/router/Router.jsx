@@ -8,6 +8,7 @@ import routes from ".";
 import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
 import VaccinationGuidePage from "@pages/VaccinationGuide";
 import Counter from "@components/test/Counter";
+import AboutUsPage from "@pages/AboustUsPage/index.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -18,7 +19,8 @@ const Router = createBrowserRouter([
         { path: "", element: <HomePage /> },
         { path: '/register-for-vaccination', element: <RegisterVaccinationPage /> },
         { path: '/vaccination-guide', element: <VaccinationGuidePage /> },
-        { path: '/services', element: <Counter /> }
+        { path: '/services', element: <Counter /> },
+        { path: routes.aboutUs, element: <AboutUsPage /> }
       ]
   },
   {
@@ -30,6 +32,6 @@ const Router = createBrowserRouter([
     ]
   }
 ],
-{ basename: import.meta.env.BASE_URL }
+  { basename: import.meta.env.BASE_URL }
 );
 export default Router;
