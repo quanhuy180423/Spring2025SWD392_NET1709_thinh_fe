@@ -10,14 +10,14 @@ const Navigation = () => {
                 </Link>
             </li>
             <li className="text-lg font-medium text-center cursor-pointer relative my-2">
-                <span className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full">
+                <Link to={routes.vaccinationGuide} className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full">
                     Guide
-                </span>
+                </Link>
             </li>
             <li className="text-lg font-medium text-center cursor-pointer relative my-2">
-                <span className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full">
+                <Link to={routes.service} className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full">
                     Services
-                </span>
+                </Link>
             </li>
             <li className="text-lg font-medium text-center cursor-pointer relative my-2">
                 <span className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full">
