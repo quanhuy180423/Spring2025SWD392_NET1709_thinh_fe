@@ -25,8 +25,8 @@ const Header = () => {
                         <li className="text-lg font-medium hover:text-teal-500">
                             <Link to={routes.home}>Home</Link>
                         </li>
-                        <li className="text-lg font-medium hover:text-teal-500">Guide</li>
-                        <li className="text-lg font-medium hover:text-teal-500">Services</li>
+                        <li className="text-lg font-medium hover:text-teal-500"><Link to={routes.vaccinationGuide}>Guide</Link></li>
+                        <li className="text-lg font-medium hover:text-teal-500"><Link to={routes.service}>Services</Link></li>
                         <li className="text-lg font-medium hover:text-teal-500">Price List</li>
                         <li className="text-lg font-medium hover:text-teal-500">
                             <Link to={routes.aboutUs}>About Us</Link>
