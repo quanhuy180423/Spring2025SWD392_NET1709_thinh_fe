@@ -15,11 +15,10 @@ const LayoutAuth = () => {
 
             <div className='flex flex-col items-center'>
                 {/* Logo */}
-                <div className="logo-container">
+                <div className="logo-container w-32">
                     <Link to={routes.home}>
                         <img src={logoApp} alt="App Logo" className="logo-app" />
                     </Link>
-
                 </div>
 
                 {/* Form Container */}
