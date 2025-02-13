@@ -18,5 +18,5 @@ export default defineConfig({
       "@src": path.resolve(__dirname, "./src"), // Alias cho các tiện ích
     },
   },
-  //base: "/Spring2025SWD392_NET1709_thinh_fe/"
+  base: "/Spring2025SWD392_NET1709_thinh_fe/",
 });
