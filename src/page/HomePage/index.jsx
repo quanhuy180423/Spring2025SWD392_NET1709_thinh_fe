@@ -2,7 +2,10 @@ import Home from "../../container/Home";
 
 const HomePage = () => {
     return (
-        <Home />
+        <div className="">
+            <Home />
+
+        </div>
     )
 }
 
