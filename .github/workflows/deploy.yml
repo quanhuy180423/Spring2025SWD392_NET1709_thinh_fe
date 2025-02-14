@@ -11,20 +11,15 @@ jobs:
     name: Build file 🔨
     runs-on: ubuntu-latest
 
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
+
     steps:
       - name: Kiểm tra repo 🛎️
         uses: actions/checkout@v3
 
       - name: Cài node 📦
         uses: actions/setup-node@v3
-
-      - name: Tạo file .env 📄
-        run: |
-          touch .env
-          echo "VITE_API_URL=${VITE_API_URL}" >> .env
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
-
 
       - name: Cài dependencies 🪛
         uses: bahmutov/npm-install@v1
