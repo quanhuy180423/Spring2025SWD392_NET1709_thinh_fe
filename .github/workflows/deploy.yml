@@ -17,6 +17,17 @@ jobs:
       - name: Cài node 📦
         uses: actions/setup-node@v3
 
+      - name: Tạo file .env 📄
+        run: |
+          touch .env
+          for secret in $(printenv | awk -F= '{print $1}'); do
+            if [[ "$secret" == VITE_* ]]; then
+              echo "$secret=${!secret}" >> .env
+            fi
+          done
+        env:
+          VITE_API_URL: ${{ secrets.VITE_AUTH_TOKEN }}
+
       - name: Cài dependencies 🪛
         uses: bahmutov/npm-install@v1
 
