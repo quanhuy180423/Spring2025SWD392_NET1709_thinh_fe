@@ -24,6 +24,9 @@ jobs:
       - name: Cài dependencies 🪛
         uses: bahmutov/npm-install@v1
 
+      - name: 🔍 Tìm tên repository
+        run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+
       - name: Build dự án 🏗️
         run: npm run build
 
