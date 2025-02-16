@@ -20,7 +20,7 @@ const Register = () => {
         <>
             <div className="flex flex-col md:flex-row">
                 <div className="w-full max-w-lg bg-white basis-1/2 mr-0 md:mr-3">
-                    <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Sign up</h1>
+                    <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Đăng ký</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                         {/* Full Name */}
                         <div className="relative flex items-center border-b-2">
@@ -31,7 +31,7 @@ const Register = () => {
                                 className="w-full p-2 focus:outline-none focus:none"
                             />
                         </div>
-                        {errors.fullname && <span className="text-red-500 text-sm">Full name is required</span>}
+                        {errors.fullname && <span className="text-red-500 text-sm">Nhập họ và tên</span>}
 
                         {/* Phone */}
                         <div className="relative flex items-center border-b-2">
@@ -55,27 +55,27 @@ const Register = () => {
                                 className="w-full p-2 focus:outline-none focus:none"
                             />
                         </div>
-                        {errors.email && <span className="text-red-500 text-sm">Email is required</span>}
+                        {errors.email && <span className="text-red-500 text-sm">Nhập địa chỉ Email</span>}
 
                         {/* Password */}
                         <div className="relative flex items-center border-b-2">
                             <FaLock className="text-gray-500 mr-3" />
                             <input
                                 {...register("password", {
-                                    required: "Password is required",
+                                    required: "Nhập mật khẩu",
                                     minLength: {
                                         value: 8,
-                                        message: "Password must be at least 8 characters",
+                                        message: "Mật khẩu ít nhất 8 ký tự",
                                     },
                                     validate: {
                                         hasUpperCase: (value) =>
-                                            /[A-Z]/.test(value) || "Password must contain at least one uppercase letter",
+                                            /[A-Z]/.test(value) || "Mật khẩu phải có ít nhất 1 ký tự viết hoa",
                                         hasLowerCase: (value) =>
-                                            /[a-z]/.test(value) || "Password must contain at least one lowercase letter",
+                                            /[a-z]/.test(value) || "Mật khẩu phải có ít nhất 1 ký tự viết thường",
                                         hasNumber: (value) =>
-                                            /\d/.test(value) || "Password must contain at least one number",
+                                            /\d/.test(value) || "Mật khẩu phải có ít nhất 1 số",
                                         hasSpecialChar: (value) =>
-                                            /[!@#$%^&*(),.?":{}|<>]/.test(value) || "Password must contain at least one special character",
+                                            /[!@#$%^&*(),.?":{}|<>]/.test(value) || "Mật khẩu phải có ký tự đặc biệt",
                                     },
                                 })}
                                 type="password"
@@ -99,7 +99,7 @@ const Register = () => {
                                 />
                             </div>
                             {errors.address?.unitNumber && (
-                                <span className="text-red-500 text-sm">Unit number is required</span>
+                                <span className="text-red-500 text-sm">Nhập số nhà</span>
                             )}
 
                             <div className="relative flex items-center border-b-2 mb-2">
@@ -111,7 +111,7 @@ const Register = () => {
                                 />
                             </div>
                             {errors.address?.ward && (
-                                <span className="text-red-500 text-sm">Ward is required</span>
+                                <span className="text-red-500 text-sm">Nhập phường/xã</span>
                             )}
 
                             <div className="relative flex items-center border-b-2 mb-2">
@@ -122,7 +122,7 @@ const Register = () => {
                                 />
                             </div>
                             {errors.address?.district && (
-                                <span className="text-red-500 text-sm">District is required</span>
+                                <span className="text-red-500 text-sm">Nhập quận/huyện</span>
                             )}
 
                             <div className="relative flex items-center border-b-2 mb-2">
@@ -133,7 +133,7 @@ const Register = () => {
                                 />
                             </div>
                             {errors.address?.province && (
-                                <span className="text-red-500 text-sm">Province is required</span>
+                                <span className="text-red-500 text-sm">Nhập tỉnh/thành phố</span>
                             )}
                         </div>
 
@@ -145,12 +145,12 @@ const Register = () => {
                                 className="w-full p-2 focus:outline-none focus:none"
                             >
                                 {/* <option value="">Select Gender</option> */}
-                                <option value="F">Female</option>
-                                <option value="M">Male</option>
+                                <option value="F">Nữ</option>
+                                <option value="M">Nam</option>
 
                             </select>
                         </div>
-                        {errors.gender && <span className="text-red-500 text-sm">Gender is required</span>}
+                        {errors.gender && <span className="text-red-500 text-sm">Chọn giới tính</span>}
 
                         {/* Date of Birth */}
                         <p>Ngày sinh</p>
@@ -163,19 +163,19 @@ const Register = () => {
                                 className="w-full p-2 focus:outline-none focus:none"
                             />
                         </div>
-                        {errors.birthday && <span className="text-red-500 text-sm">Date of Birth is required</span>}
+                        {errors.birthday && <span className="text-red-500 text-sm">Nhập ngày sinh</span>}
 
                         {/* Submit Button */}
                         <button
                             type="submit"
                             className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg font-semibold transition"
                         >
-                            {status === "loading" ? "Register in..." : "Register"}
+                            {status === "Đăng ký" ? "Đợi xíu..." : "Đăng ký"}
 
                         </button>
                     </form>
                     <p className="text-sm text-center text-gray-600 mt-4">
-                        Đã có tài khoảng? <Link to={routes.auth.login} className="text-blue-500">Đăng nhập</Link>
+                        Đã có tài khoản? <Link to={routes.auth.login} className="text-blue-500">Đăng nhập</Link>
                     </p>
                 </div>
                 <div className="basis-1/2 hidden md:flex justify-center items-center">

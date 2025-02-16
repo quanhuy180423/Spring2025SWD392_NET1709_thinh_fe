@@ -49,27 +49,27 @@ const Login = () => {
       </div>
 
       <div className="w-full max-w-md bg-white flex flex-col justify-center">
-        <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Sign in</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Đăng nhập</h1>
         {error && <p className="text-red-500 text-center">{error?.message || "An unexpected error occurred"}</p>}
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="relative flex items-center border-b-2">
-            <input {...register("email", { required: "Email is required" })} type="email" placeholder="Your Email" className="w-full p-3 focus:outline-none" />
+            <input {...register("email", { required: "Email is required" })} type="email" placeholder="Email" className="w-full p-3 focus:outline-none" />
           </div>
           {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
 
           <div className="relative flex items-center border-b-2">
-            <input {...register("password", { required: "Password is required" })} type="password" placeholder="Password" className="w-full p-3 focus:outline-none" />
+            <input {...register("password", { required: "Password is required" })} type="password" placeholder="Mật khẩu" className="w-full p-3 focus:outline-none" />
           </div>
           {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
 
           <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg font-semibold transition" disabled={status === "loading"}>
-            {status === "loading" ? "Logging in..." : "Login"}
+            {status === "Chờ..." ? "Đang đăng nhập..." : "Đăng nhập"}
           </button>
         </form>
 
         <p className="text-sm text-center text-gray-600 mt-4">
-          Don't have an account? <Link to={routes.auth.register} className="text-blue-500">Sign up here</Link>
+          Bạn chưa có tài khoản? <Link to={routes.auth.register} className="text-blue-500">Đăng ký</Link>
         </p>
       </div>
     </div>
