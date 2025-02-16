@@ -1,5 +1,4 @@
 import logoMedicince from "./logoMedicince.png";
-import logoMedicineRemoveBackground from "./Remove-bg.ai_1737608178359.png";
 import logoMedicineBlue from "./logoMedicince_blue.png";
 import banner1 from "./banner1.webp";
 import banner2 from "./banner2.webp";
@@ -20,7 +19,6 @@ import step3_3 from "./Step3.3.webp";
 export const Assets = {
   logoMedicineBlue,
   logoMedicince,
-  logoMedicineRemoveBackground,
   banner1,
   banner2,
   banner3,
