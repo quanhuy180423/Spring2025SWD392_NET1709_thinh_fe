@@ -26,7 +26,7 @@ const Login = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/");
+        navigate(routes.home);
       })
       .catch((err) => {
         toast.error(`❌ ${err || "Đăng nhập thất bại!"}`, {
@@ -44,11 +44,11 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="basis-1/2 hidden md:flex justify-center items-center">
+      <div className="basis-1/2 hidden md:flex justify-center items-center mr-3">
         <img src="https://i.pinimg.com/736x/d7/9d/40/d79d40d0a75430f94380cd2fdb4b57a5.jpg" alt="thumbnail" />
       </div>
 
-      <div className="w-full max-w-md bg-white flex flex-col justify-center ml-3">
+      <div className="w-full max-w-md bg-white flex flex-col justify-center">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">Sign in</h1>
         {error && <p className="text-red-500 text-center">{error?.message || "An unexpected error occurred"}</p>}
 

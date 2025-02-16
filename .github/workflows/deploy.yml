@@ -4,11 +4,15 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
     name: Build file 🔨
     runs-on: ubuntu-latest
+
+    env:
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
     steps:
       - name: Kiểm tra repo 🛎️
@@ -19,6 +23,9 @@ jobs:
 
       - name: Cài dependencies 🪛
         uses: bahmutov/npm-install@v1
+
+      - name: 🔍 Tìm tên repository
+        run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
 
       - name: Build dự án 🏗️
         run: npm run build
