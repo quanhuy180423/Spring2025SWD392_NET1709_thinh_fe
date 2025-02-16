@@ -22,7 +22,7 @@ const LayoutAuth = () => {
                 </div>
 
                 {/* Form Container */}
-                <div className="max-h-4/5 md:h-4/5 md:w-4/5 bg-white p-4 px-4 rounded-lg my-2 z-10 relative shadow-2xl">
+                <div className="max-h-4/5 md:h-4/5 md:w-4/5 sm:w-4/5 bg-white p-4 px-4 rounded-lg my-2 mx-2 z-10 relative shadow-2xl">
                     <div>
                         <div className="w-full">
                             {/* AnimatePresence để xử lý animation khi chuyển trang */}

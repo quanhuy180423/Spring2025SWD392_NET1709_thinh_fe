@@ -12,10 +12,21 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const registerUser = createAsyncThunk(
+  'auth/register',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      return await authService.register(credentials);
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  }
+)
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: authService.getCurrentUser(),
+    //user: authService.getCurrentUser(),
     isAuthenticated: authService.isAuthenticated(),
     status: "idle",
     error: null,

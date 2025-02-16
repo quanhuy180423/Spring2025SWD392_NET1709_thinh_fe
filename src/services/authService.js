@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosClient from "./axiosClient";
 
 const authService = {
@@ -8,6 +9,34 @@ const authService = {
       localStorage.setItem("user", JSON.stringify(response.user));
     }
     return response;
+  },
+
+  register: async (credentials) => {
+    const response = await axiosClient.post("api/auth/signup", credentials)
+    console.log(response.code)
+    if (response.code === '201') {
+      toast.success("🎉 Đăng ký thành công!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(`❌  "Đăng ký thất bại!`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   },
 
   logout: () => {

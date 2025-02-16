@@ -3,7 +3,7 @@ import HomePage from "@pages/HomePage";
 import LayoutMain from "@layouts/LayoutMain";
 import LayoutAuth from "@layouts/LayoutAuth";
 import LoginPage from "@pages/LoginPage";
-import RegisterPage from "@pages/RegitserPage";
+import RegisterPage from "@pages/RegitserPage/index.jsx";
 import routes from ".";
 import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
 import VaccinationGuidePage from "@pages/VaccinationGuide";
