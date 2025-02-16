@@ -1,9 +1,9 @@
 const AboutUs = () => {
     return (
         <div className="mx-auto px-4 lg:px-16">
-            <div className="pt-5 mt-3 bg-slate-100">
+            <div className="pt-5 mt-3 ">
                 <h2 className="text-4xl text-teal-700 font-bold text-center">
-                    Vaccination Center Nhân Ái
+                    Trung tâm Tiêm chủng Nhân Ái
                 </h2>
             </div>
             <div>
