@@ -11,7 +11,7 @@ const Header = () => {
             {/* Logo */}
             <div className="flex items-center gap-2 px-2 cursor-pointer mlg:w-full">
                 <Link to="/">
-                    <img src={Assets.logoMedicineRemoveBackground} alt="logo" className="w-12 h-12 sm:w-16 sm:h-16 rounded-full cursor-pointer bg-white transition-all duration-300" />
+                    <img src={Assets.logoMedicince} alt="logo" className="w-12 h-12 sm:w-16 sm:h-16 rounded-full cursor-pointertransition-all duration-300" />
                 </Link>
                 <h4 className="text-xl sm:text-2xl text-white font-semibold transition-all duration-300">Nhân Ái</h4>
             </div>

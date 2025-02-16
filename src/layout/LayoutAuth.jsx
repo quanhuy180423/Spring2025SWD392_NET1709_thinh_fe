@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import './Styles/LayoutMain.css';
-import logoApp from '../assets/logoMedicince.png';
+import { Assets } from '../assets/Assets.js'
 import routes from '@src/router';
 const LayoutAuth = () => {
     const location = useLocation(); // Lấy vị trí hiện tại để theo dõi đường dẫn
@@ -17,7 +17,7 @@ const LayoutAuth = () => {
                 {/* Logo */}
                 <div className="logo-container w-32">
                     <Link to={routes.home}>
-                        <img src={logoApp} alt="App Logo" className="logo-app" />
+                        <img src={Assets.logoMedicineBlue} alt="App Logo" className="logo-app" />
                     </Link>
                 </div>
 
