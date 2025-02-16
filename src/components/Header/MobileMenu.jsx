@@ -1,8 +1,10 @@
+import { useState } from "react";
 import Navigation from "./Navigation.jsx";
 import UserActions from "./UserActions.jsx";
 
 
-const MobileMenu = ({ isMenuOpen, setIsMenuOpen }) => {
+const MobileMenu = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
         <div className="block md:hidden z-10">
             {/* Hamburger Button */}

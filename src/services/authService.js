@@ -4,8 +4,8 @@ import axiosClient from "./axiosClient";
 const authService = {
   login: async (credentials) => {
     const response = await axiosClient.post("api/auth/signin", credentials);
-    if (response.accessToken) {
-      localStorage.setItem("accessToken", response.accessToken);
+    if (response.token) {
+      localStorage.setItem("accessToken", response.token);
       localStorage.setItem("user", JSON.stringify(response.user));
     }
     return response;
