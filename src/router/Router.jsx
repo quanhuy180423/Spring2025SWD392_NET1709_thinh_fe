@@ -4,11 +4,13 @@ import LayoutMain from "@layouts/LayoutMain";
 import LayoutAuth from "@layouts/LayoutAuth";
 import LoginPage from "@pages/LoginPage";
 import RegisterPage from "@pages/RegitserPage/index.jsx";
-import routes from ".";
+import routes from "./index.js";
 import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
 import VaccinationGuidePage from "@pages/VaccinationGuide";
 import Counter from "@components/test/Counter";
 import AboutUsPage from "@pages/AboustUsPage/index.jsx";
+import LayoutAdmin from "@layouts/LayoutAdmin.jsx";
+import DashBoardPage from "@pages/adminPage/DashboardPage/index.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -29,6 +31,12 @@ const Router = createBrowserRouter([
     children: [
       { path: routes.auth.login.split('/')[2], element: <LoginPage /> }, // Lấy "login" từ "/auth/login"
       { path: routes.auth.register.split('/')[2], element: <RegisterPage /> }, // Lấy "register" từ "/auth/register"
+    ]
+  }, {
+    path: routes.admin.dashboard,
+    element: <LayoutAdmin />,
+    children: [
+      { path: routes.admin.dashboard, element: <DashBoardPage /> }
     ]
   }
 ],

@@ -8,6 +8,9 @@ const routes = {
   },
   vaccinationGuide: "/vaccination-guide",
   service: "/services",
+  admin:{
+    dashboard:'/admin'
+  }
 };
 
 export default routes;
