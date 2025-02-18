@@ -1,4 +1,5 @@
 import Banner from '@containers/Banner/index.jsx'
+import RegisterVaccination from '@containers/RegisterVaccination/index.jsx'
 import AboutUsPage from '@pages/AboustUsPage/index.jsx'
 import VaccinationGuidePage from '@pages/VaccinationGuide/index.jsx'
 
@@ -16,6 +17,9 @@ const Home = () => {
        </div>
        <div name = "price List" className="h-screen flex items-center justify-center">
            <h1 className="text-4xl font-bold text-center">Price List</h1>
+       </div>
+       <div name = "registerVaccination" className="h-screen flex items-center justify-center">
+        <RegisterVaccination/>
        </div>
        <div name = "about Us" className="h-screen flex items-center justify-center">
            <AboutUsPage/>

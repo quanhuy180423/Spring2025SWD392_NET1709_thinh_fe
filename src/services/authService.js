@@ -4,16 +4,14 @@ import axiosClient from "./axiosClient";
 const authService = {
   login: async (credentials) => {
     const response = await axiosClient.post("api/auth/signin", credentials);
-    if (response.token) {
-      localStorage.setItem("accessToken", response.token);
-      localStorage.setItem("user", JSON.stringify(response.user));
+    if (response.data.token) {
+      localStorage.setItem("accessToken", response.data.token);
     }
     return response;
   },
 
   register: async (credentials) => {
     const response = await axiosClient.post("api/auth/signup", credentials)
-    console.log(response.code)
     if (response.code === '201') {
       toast.success("🎉 Đăng ký thành công!", {
         position: "top-right",

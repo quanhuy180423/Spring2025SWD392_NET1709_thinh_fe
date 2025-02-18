@@ -5,6 +5,7 @@ const sectionNames = {
     guide: "Hướng dẫn",
     service: "Dịch vụ",
     "price List": "Bảng giá",
+    "registerVaccination": "Đăng ký tiêm",
     "about Us": "Giới thiệu",
 };
 

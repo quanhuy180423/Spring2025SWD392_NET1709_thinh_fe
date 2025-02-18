@@ -16,10 +16,10 @@ const Router = createBrowserRouter([
     element: <LayoutMain />,
     children:
       [
-        { path: "", element: <HomePage /> },
-        { path: '/register-for-vaccination', element: <RegisterVaccinationPage /> },
-        { path: '/vaccination-guide', element: <VaccinationGuidePage /> },
-        { path: '/services', element: <Counter /> },
+        { path: routes.home, element: <HomePage /> },
+        { path: routes.registerVaccination, element: <RegisterVaccinationPage /> },
+        { path: routes.vaccinationGuide, element: <VaccinationGuidePage /> },
+        { path: routes.service, element: <Counter /> },
         { path: routes.aboutUs, element: <AboutUsPage /> }
       ]
   },
