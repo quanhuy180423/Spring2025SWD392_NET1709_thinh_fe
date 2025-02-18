@@ -13,7 +13,7 @@ const RegisterVaccination = () => {
     return (
         <div className="max-w-4xl mx-auto p-6">
             <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold">Register for Vaccination</h2>
+                <h2 className="text-3xl font-bold mb-4">Đăng ký tiêm chủng</h2>
                 <p className="text-gray-600">Mời Quý khách đăng ký thông tin tiêm chủng để tiết kiệm thời gian khi đến trung tâm làm thủ tục và hưởng thêm nhiều chính sách ưu đãi khác.</p>
             </div>
 

@@ -1,6 +1,6 @@
 const AboutUs = () => {
     return (
-        <div className="mx-auto px-4 lg:px-16">
+        <div className="mx-auto px-4 lg:px-16 pb-10">
             <div className="pt-5 mt-3 ">
                 <h2 className="text-4xl text-teal-700 font-bold text-center">
                     Trung tâm Tiêm chủng Nhân Ái
