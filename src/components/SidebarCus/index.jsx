@@ -21,18 +21,18 @@ const Sidebar = () => {
   // Danh sách chức năng với icon và đường dẫn
   const listFunctions = [
     {
-      name: "Profile",
+      name: "Hồ sơ",
       icon: <SiGoogleanalytics size={20} />,
       path: "/profile",
     },
     {
-      name: "Profile Child",
+      name: "Hồ sơ trẻ em",
       icon: <FaUsers size={20} />,
       path: "/profileChild",
     },
-    { name: "Order", icon: <FaSyringe size={20} />, path: "/orders" },
+    { name: "Hóa đơn", icon: <FaSyringe size={20} />, path: "/orders" },
     {
-      name: "Transaction",
+      name: "Giao dịch",
       icon: <FaClipboardList size={20} />,
       path: "/transactions",
     },

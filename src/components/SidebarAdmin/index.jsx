@@ -1,19 +1,27 @@
 import { Assets } from '@src/assets/Assets.js';
-import { FaBlog, FaClipboardList, FaSyringe, FaUser, FaUsers } from 'react-icons/fa';
-import { MdLogout } from 'react-icons/md';
+import routes from '@src/router/index.js';
+import { logout } from '@src/stores/slices/authSlice.js';
+import { FaBlog, FaClipboardList, FaSignOutAlt, FaSyringe, FaUser, FaUsers } from 'react-icons/fa';
 import { SiGoogleanalytics } from 'react-icons/si';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+    dispatch(logout());
+    localStorage.clear();
+    navigate(routes.auth.login);
+  };
     // Danh sách chức năng với icon và đường dẫn
     const listFunctions = [
         { name: 'Dashboard', icon: <SiGoogleanalytics size={20} />, path: '/admin' },
-        { name: 'User', icon: <FaUsers size={20} />, path: '/users' },
-        { name: 'Vaccination', icon: <FaSyringe size={20} />, path: '/vaccination' },
-        { name: 'Service', icon: <FaClipboardList size={20} />, path: '/service' },
+        { name: 'Tài khoản', icon: <FaUsers size={20} />, path: '/users' },
+        { name: 'Vắc-xin', icon: <FaSyringe size={20} />, path: '/vaccination' },
+        { name: 'Dịch vụ', icon: <FaClipboardList size={20} />, path: '/service' },
         { name: 'Blog', icon: <FaBlog size={20} />, path: '/blog' },
-        { name: 'Logout', icon: <MdLogout size={20} />, path: '/logout' },
     ];
 
     return (
@@ -44,6 +52,10 @@ const Sidebar = () => {
                     </li>
                 ))}
             </ul>
+            <button className="flex items-center justify-center gap-3 w-full p-4 text-xl bg-white text-[rgb(33,103,221)] hover:bg-blue-500 hover:text-white transition duration-300 cursor-pointer" onClick={() => handleLogout()}>
+                      <FaSignOutAlt />
+                      <span>Đăng xuất</span>
+                    </button>
             <div className="p-4 text-center text-sm text-blue-400">© 2024 Nhân Ái</div>
         </div>
     );
