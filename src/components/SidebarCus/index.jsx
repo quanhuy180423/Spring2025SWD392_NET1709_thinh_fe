@@ -23,12 +23,12 @@ const Sidebar = () => {
     {
       name: "Hồ sơ",
       icon: <SiGoogleanalytics size={20} />,
-      path: "/profile",
+      path: routes.user.profile,
     },
     {
       name: "Hồ sơ trẻ em",
       icon: <FaUsers size={20} />,
-      path: "/profileChild",
+      path: routes.user.registerProfileChild,
     },
     { name: "Hóa đơn", icon: <FaSyringe size={20} />, path: "/orders" },
     {
@@ -89,10 +89,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-        <button className="flex items-center justify-center gap-3 w-full p-4 text-xl bg-white text-[rgb(33,103,221)] hover:bg-blue-500 hover:text-white transition duration-300 cursor-pointer" onClick={() => handleLogout()}>
-          <FaSignOutAlt />
-          <span>Đăng xuất</span>
-        </button>
+      <button className="flex items-center justify-center gap-3 w-full p-4 text-xl bg-white text-[rgb(33,103,221)] hover:bg-blue-500 hover:text-white transition duration-300 cursor-pointer" onClick={() => handleLogout()}>
+        <FaSignOutAlt />
+        <span>Đăng xuất</span>
+      </button>
       <div className="p-4 text-center text-sm text-blue-400">
         © 2025 Nhân Ái
       </div>

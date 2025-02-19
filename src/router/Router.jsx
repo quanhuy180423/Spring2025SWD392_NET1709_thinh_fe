@@ -13,6 +13,7 @@ import LayoutAdmin from "@layouts/LayoutAdmin.jsx";
 import DashBoardPage from "@pages/adminPage/DashboardPage/index.jsx";
 import LayoutCus from "@layouts/LayoutCus.jsx";
 import UserProfile from "@containers/customer/ProfileCus/index.jsx";
+import RegisterProfileChildPage from "@pages/RegisterProfileChildPage/index.jsx";
 
 const Router = createBrowserRouter(
   [
@@ -39,9 +40,13 @@ const Router = createBrowserRouter(
       ],
     },
     {
-      path: routes.user.profile,
+      path: routes.user.profile.split("/")[1],
       element: <LayoutCus />,
-      children: [{ path: routes.user.profile, element: <UserProfile /> }],
+      children: [
+        { path: routes.user.profile.split("/")[2], element: <UserProfile /> },
+        { path: routes.user.registerProfileChild.split("/")[2], element: <RegisterProfileChildPage /> }
+      ],
+
     },
     {
       path: routes.admin.dashboard,
