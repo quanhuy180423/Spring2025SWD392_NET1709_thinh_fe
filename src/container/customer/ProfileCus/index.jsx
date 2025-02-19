@@ -56,32 +56,32 @@ const UserProfile = () => {
   return (
     <div className="h-full mx-auto bg-white rounded-lg p-6">
       <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-        User Profile
+        Thông tin khách hàng
       </h2>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           {isEditing ? (
             <>
               <div className="pb-4">
-                <label className="block mb-1 text-sm font-bold mb-2">
+                <label className="block text-sm font-bold mb-2">
                   Tên đầy đủ
                 </label>
                 <input
                   type="text"
                   name="fullname"
-                  value={editedData.fullname || ""}
+                  value={editedData.fullname}
                   onChange={handleInputChange}
                   className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="pb-4">
-                <label className="block mb-1 text-sm font-bold mb-2">
+                <label className="block text-sm font-bold mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   name="email"
-                  value={editedData.email || ""}
+                  value={editedData.email}
                   onChange={handleInputChange}
                   className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -89,8 +89,8 @@ const UserProfile = () => {
             </>
           ) : (
             <>
-              <TextField title="Tên đầy đủ" data={userData.fullname || ""} />
-              <TextField title="Email" data={userData.email || ""} />
+              <TextField title="Tên đầy đủ" data={userData.fullname} />
+              <TextField title="Email" data={userData.email} />
             </>
           )}
         </div>
@@ -98,37 +98,37 @@ const UserProfile = () => {
           {isEditing ? (
             <>
               <div className="pb-4"> 
-                <label className="block mb-1 text-sm font-bold mb-2">
+                <label className="block text-sm font-bold mb-2">
                   Số điện thoại
                 </label>
                 <input
                   type="text"
                   name="phoneNumber"
-                  value={editedData.phoneNumber || ""}
+                  value={editedData.phoneNumber}
                   onChange={handleInputChange}
                   className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="pb-4">
-                <label className="block mb-1 text-sm font-bold mb-2">
+                <label className="block text-sm font-bold mb-2">
                   Ngày sinh
                 </label>
                 <input
                   type="date"
                   name="birthday"
-                  value={editedData.birthday || ""}
+                  value={editedData.birthday}
                   onChange={handleInputChange}
                   className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="pb-4">
-                <label className="block mb-1 text-sm font-bold mb-2">
+                <label className="block text-sm font-bold mb-2">
                   Giới tính
                 </label>
                 <div className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500">
                   <select
                     name="gender"
-                    value={editedData.gender || ""}
+                    value={editedData.gender === "M" ? "Nam" : " Nữ"}
                     onChange={handleInputChange}
                     className="rounded w-full focus:outline-none"
                   >
@@ -142,17 +142,87 @@ const UserProfile = () => {
             <>
               <TextField
                 title="Số điện thoại"
-                data={userData.phoneNumber || ""}
+                data={userData.phoneNumber}
               />
               <TextField
                 title="Ngày sinh"
-                data={formatDate(userData.birthday) || ""}
+                data={formatDate(userData.birthday)}
               />
-              <TextField title="Giới tính" data={userData.gender || ""} />
+              <TextField title="Giới tính" data={userData.gender === "M" ? "Nam" : "Nữ"} />
             </>
           )}
         </div>
       </div>
+      <div className="grid grid-cols-2 gap-4">
+          {isEditing ? (
+            <>
+              <div className="pb-4">
+                <label className="block text-sm font-bold mb-2">
+                  Số nhà
+                </label>
+                <input
+                  type="text"
+                  name="fullname"
+                  value={editedData.address.unitNumber}
+                  onChange={handleInputChange}
+                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="pb-4">
+                <label className="block text-sm font-bold mb-2">
+                  Phường/Xã
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={editedData.address.ward}
+                  onChange={handleInputChange}
+                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <TextField title="Số nhà" data={userData.address.unitNumber} />
+              <TextField title="Phường/Xã" data={userData.address.ward} />
+            </>
+          )}
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {isEditing ? (
+            <>
+              <div className="pb-4">
+                <label className="block text-sm font-bold mb-2">
+                  Quận/Huyện
+                </label>
+                <input
+                  type="text"
+                  name="fullname"
+                  value={editedData.address.district}
+                  onChange={handleInputChange}
+                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="pb-4">
+                <label className="block text-sm font-bold mb-2">
+                  Tỉnh/Thành phố
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={editedData.address.province}
+                  onChange={handleInputChange}
+                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <TextField title="Quận/Huyện" data={userData.address.district} />
+              <TextField title="Tỉnh/Thành phố" data={userData.address.province} />
+            </>
+          )}
+        </div>
       <div>
         {isEditing ? (
           <>
