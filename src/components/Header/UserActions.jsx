@@ -16,6 +16,7 @@ const UserActions = () => {
         const fetchUser = async () => {
             const response = await userService.getUser();
             setUserData(response);
+            console.log(response)
         }
         fetchUser();
     }, []);
