@@ -2,6 +2,12 @@ import { Outlet } from "react-router-dom"
 import Sidebar from "@components/SidebarAdmin/index.jsx"
 
 const LayoutAdmin = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        //functions here
+    }, [location.pathname]);
+
     return (
         <div>
 
