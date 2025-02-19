@@ -1,7 +1,14 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Sidebar from "@components/Sidebar/index.jsx"
+import { useEffect } from "react";
 
 const LayoutAdmin = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        //functions here
+    }, [location.pathname]);
+
     return (
         <div>
 
