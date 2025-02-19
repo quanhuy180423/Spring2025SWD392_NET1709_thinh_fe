@@ -5,12 +5,13 @@ import LayoutAuth from "@layouts/LayoutAuth";
 import LoginPage from "@pages/LoginPage";
 import RegisterPage from "@pages/RegitserPage/index.jsx";
 import routes from "./index.js";
-import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
+import RegisterVaccinationPage from "../page/RegisterVaccinationPage/index.jsx";
 import VaccinationGuidePage from "@pages/VaccinationGuide";
 import Counter from "@components/test/Counter";
 import AboutUsPage from "@pages/AboustUsPage/index.jsx";
 import LayoutAdmin from "@layouts/LayoutAdmin.jsx";
 import DashBoardPage from "@pages/adminPage/DashboardPage/index.jsx";
+import RegisterProfileChildPage from "@pages/RegisterProfileChildPage/index.jsx";
 
 const Router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const Router = createBrowserRouter([
         { path: routes.registerVaccination, element: <RegisterVaccinationPage /> },
         { path: routes.vaccinationGuide, element: <VaccinationGuidePage /> },
         { path: routes.service, element: <Counter /> },
-        { path: routes.aboutUs, element: <AboutUsPage /> }
+        { path: routes.aboutUs, element: <AboutUsPage /> },
+        { path: routes.RegisterProfileChild, element: <RegisterProfileChildPage /> },
       ]
   },
   {
