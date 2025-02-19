@@ -9,8 +9,8 @@ const routes = {
   RegisterProfileChild: '/register-profile-child',
   vaccinationGuide: "/vaccination-guide",
   service: "/services",
-  admin: {
-    dashboard: '/admin'
+  admin:{
+    dashboard:'/admin'
   }
 };
 

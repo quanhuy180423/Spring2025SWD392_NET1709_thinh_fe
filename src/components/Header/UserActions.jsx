@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt, FaUser, FaRegCalendarAlt } from "react-icons/fa";
 import routes from "@src/router/index.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,11 @@ const UserActions = () => {
     const dispatch = useDispatch();
     const { isAuthenticated, user } = useSelector(state => state.auth);
     const [userData, setUserData] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUser = async () => {
             const response = await userService.getUser();
-            console.log(response);
             setUserData(response);
         }
         fetchUser();
@@ -23,6 +23,7 @@ const UserActions = () => {
     const handleLogout = () => {
         dispatch(logout());
         localStorage.clear();
+        navigate(routes.auth.login);
     }
 
     return (
@@ -31,7 +32,7 @@ const UserActions = () => {
                 <div className="flex gap-4 items-center">
                     <div className="flex gap-3 items-center cursor-pointer bg-white py-2 md:px-4 rounded-full">
                         <FaUser className="text-[rgb(33,103,221)]" />
-                        <Link to={routes.profile} className="text-lg text-[rgb(33,103,221)] font-medium">
+                        <Link to={routes.user.profile} className="text-lg text-[rgb(33,103,221)] font-medium">
                             {userData?.fullname}
                         </Link>
                     </div>

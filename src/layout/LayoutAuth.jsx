@@ -3,8 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import './Styles/LayoutMain.css';
 import { Assets } from '../assets/Assets.js'
 import routes from '@src/router';
+import { useEffect } from 'react';
 const LayoutAuth = () => {
-    const location = useLocation(); // Lấy vị trí hiện tại để theo dõi đường dẫn
+    const location = useLocation();
+    
+        useEffect(() => {
+            //functions here
+        }, [location.pathname]);
 
     return (
         <div className="layout-auth">

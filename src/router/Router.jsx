@@ -11,20 +11,21 @@ import Counter from "@components/test/Counter";
 import AboutUsPage from "@pages/AboustUsPage/index.jsx";
 import LayoutAdmin from "@layouts/LayoutAdmin.jsx";
 import DashBoardPage from "@pages/adminPage/DashboardPage/index.jsx";
-import RegisterProfileChildPage from "@pages/RegisterProfileChildPage/index.jsx";
 
-const Router = createBrowserRouter([
-  {
-    path: routes.home,
-    element: <LayoutMain />,
-    children:
-      [
+const Router = createBrowserRouter(
+  [
+    {
+      path: routes.home,
+      element: <LayoutMain />,
+      children: [
         { path: routes.home, element: <HomePage /> },
-        { path: routes.registerVaccination, element: <RegisterVaccinationPage /> },
+        {
+          path: routes.registerVaccination,
+          element: <RegisterVaccinationPage />,
+        },
         { path: routes.vaccinationGuide, element: <VaccinationGuidePage /> },
         { path: routes.service, element: <Counter /> },
-        { path: routes.aboutUs, element: <AboutUsPage /> },
-        { path: routes.RegisterProfileChild, element: <RegisterProfileChildPage /> },
+        { path: routes.aboutUs, element: <AboutUsPage /> }
       ]
   },
   {
