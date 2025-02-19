@@ -3,12 +3,15 @@ import { userService } from "@src/services/userService.js";
 import TextField from "@src/components/TextField/index.jsx";
 import { formatDate } from "@utils/format.js";
 import ChangePasswordModal from "@src/components/Modal/index.jsx";
+import RegisterProfileChild from "@containers/RegisterProfileChild/index.jsx";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalRegister, setIsModalRegister] = useState(false);
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({});
 
@@ -55,9 +58,17 @@ const UserProfile = () => {
 
   return (
     <div className="h-full mx-auto bg-white rounded-lg p-6">
-      <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-        Thông tin khách hàng
-      </h2>
+      <div className="flex flex-row justify-between items-center">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+          Thông tin khách hàng
+        </h2>
+        <button
+          onClick={() => { setIsModalRegister(true); console.log(isModalRegister) }}
+          className="bg-[rgb(33,103,221)] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6 mr-4">
+          Đăng ký hồ sơ trẻ em
+        </button>
+      </div>
+
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           {isEditing ? (
@@ -97,7 +108,7 @@ const UserProfile = () => {
         <div className="grid grid-cols-3 gap-4">
           {isEditing ? (
             <>
-              <div className="pb-4"> 
+              <div className="pb-4">
                 <label className="block text-sm font-bold mb-2">
                   Số điện thoại
                 </label>
@@ -153,76 +164,77 @@ const UserProfile = () => {
           )}
         </div>
       </div>
+
       <div className="grid grid-cols-2 gap-4">
-          {isEditing ? (
-            <>
-              <div className="pb-4">
-                <label className="block text-sm font-bold mb-2">
-                  Số nhà
-                </label>
-                <input
-                  type="text"
-                  name="fullname"
-                  value={editedData.address.unitNumber}
-                  onChange={handleInputChange}
-                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="pb-4">
-                <label className="block text-sm font-bold mb-2">
-                  Phường/Xã
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={editedData.address.ward}
-                  onChange={handleInputChange}
-                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <TextField title="Số nhà" data={userData.address.unitNumber} />
-              <TextField title="Phường/Xã" data={userData.address.ward} />
-            </>
-          )}
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {isEditing ? (
-            <>
-              <div className="pb-4">
-                <label className="block text-sm font-bold mb-2">
-                  Quận/Huyện
-                </label>
-                <input
-                  type="text"
-                  name="fullname"
-                  value={editedData.address.district}
-                  onChange={handleInputChange}
-                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="pb-4">
-                <label className="block text-sm font-bold mb-2">
-                  Tỉnh/Thành phố
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={editedData.address.province}
-                  onChange={handleInputChange}
-                  className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <TextField title="Quận/Huyện" data={userData.address.district} />
-              <TextField title="Tỉnh/Thành phố" data={userData.address.province} />
-            </>
-          )}
-        </div>
+        {isEditing ? (
+          <>
+            <div className="pb-4">
+              <label className="block text-sm font-bold mb-2">
+                Số nhà
+              </label>
+              <input
+                type="text"
+                name="fullname"
+                value={editedData.address.unitNumber}
+                onChange={handleInputChange}
+                className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="pb-4">
+              <label className="block text-sm font-bold mb-2">
+                Phường/Xã
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={editedData.address.ward}
+                onChange={handleInputChange}
+                className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <TextField title="Số nhà" data={userData.address.unitNumber} />
+            <TextField title="Phường/Xã" data={userData.address.ward} />
+          </>
+        )}
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {isEditing ? (
+          <>
+            <div className="pb-4">
+              <label className="block text-sm font-bold mb-2">
+                Quận/Huyện
+              </label>
+              <input
+                type="text"
+                name="fullname"
+                value={editedData.address.district}
+                onChange={handleInputChange}
+                className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="pb-4">
+              <label className="block text-sm font-bold mb-2">
+                Tỉnh/Thành phố
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={editedData.address.province}
+                onChange={handleInputChange}
+                className="shadow border rounded w-full py-2 px-3 h-[40px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <TextField title="Quận/Huyện" data={userData.address.district} />
+            <TextField title="Tỉnh/Thành phố" data={userData.address.province} />
+          </>
+        )}
+      </div>
       <div>
         {isEditing ? (
           <>
@@ -262,6 +274,11 @@ const UserProfile = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      {/* Modal đăng ký tài khoảng cho trẻ em */}
+      <RegisterProfileChild
+        isOpen={isModalRegister}
+        onClose={() => setIsModalRegister(false)} />
     </div>
   );
 };

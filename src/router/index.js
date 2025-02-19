@@ -1,17 +1,21 @@
 const routes = {
+  home: "/",
+  registerVaccination: "/register-for-vaccination",
+  aboutUs: "/About-us",
   auth: {
     login: "/auth/login",
     register: "/auth/register",
   },
-  home: "/",
-  registerVaccination: '/register-for-vaccination',
-  aboutUs: '/About-us',
-  RegisterProfileChild: '/register-profile-child',
+
   vaccinationGuide: "/vaccination-guide",
   service: "/services",
-  admin:{
-    dashboard:'/admin'
-  }
+  user: {
+    profile: "/user/profile",
+    registerProfileChild: '/user/register-profile-child',
+  },
+  admin: {
+    dashboard: "/admin",
+  },
 };
 
 export default routes;
