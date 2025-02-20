@@ -2,6 +2,7 @@ import Banner from '@containers/Banner/index.jsx'
 import PriceList from '@containers/PriceList/index.jsx'
 import RegisterVaccination from '@containers/RegisterVaccination/index.jsx'
 import AboutUsPage from '@pages/AboustUsPage/index.jsx'
+import BlogPage from '@pages/BlogPage/index.jsx'
 import VaccinationGuidePage from '@pages/VaccinationGuide/index.jsx'
 
 const Home = () => {
@@ -24,6 +25,9 @@ const Home = () => {
        </div>
        <div name = "about Us" className="h-screen flex items-center justify-center">
            <AboutUsPage/>
+       </div>
+       <div name="blog" className='h-screen flex items-center justify-center'>
+            <BlogPage/>
        </div>
        </div>
     )

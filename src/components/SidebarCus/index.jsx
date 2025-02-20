@@ -8,7 +8,6 @@ import {
   FaSignOutAlt,
   FaSyringe,
   FaUser,
-  FaUsers,
 } from "react-icons/fa";
 import { SiGoogleanalytics } from "react-icons/si";
 import { useDispatch } from "react-redux";
@@ -24,11 +23,6 @@ const Sidebar = () => {
       name: "Hồ sơ",
       icon: <SiGoogleanalytics size={20} />,
       path: routes.user.profile,
-    },
-    {
-      name: "Hồ sơ trẻ em",
-      icon: <FaUsers size={20} />,
-      path: routes.user.registerProfileChild,
     },
     { name: "Hóa đơn", icon: <FaSyringe size={20} />, path: "/orders" },
     {
