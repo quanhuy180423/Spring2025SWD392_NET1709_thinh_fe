@@ -1,5 +1,6 @@
 const routes = {
   home: "/",
+  notFound: "/not-found",
   registerVaccination: "/register-for-vaccination",
   aboutUs: "/About-us",
   auth: {

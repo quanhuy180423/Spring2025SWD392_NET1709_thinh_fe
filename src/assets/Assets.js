@@ -15,7 +15,7 @@ import step2_3 from "./Step2.3.webp";
 import step3_1 from "./Step3.1.webp";
 import step3_2 from "./Step3.2.webp";
 import step3_3 from "./Step3.3.webp";
-
+import sr_404 from "./404_sr.jpg";
 export const Assets = {
   logoMedicineBlue,
   logoMedicince,
@@ -34,4 +34,5 @@ export const Assets = {
   step3_1,
   step3_2,
   step3_3,
+  sr_404,
 };
