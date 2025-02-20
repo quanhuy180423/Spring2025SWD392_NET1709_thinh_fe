@@ -1,14 +1,31 @@
 
+import { userService } from "@src/services/userService.js";
 import { useForm } from "react-hook-form";
+import {
+    FaUser, FaCalendarAlt, FaVenusMars, FaTimes,
+    FaHospital, FaExclamationTriangle, FaRulerVertical, FaWeight
+}
+    from 'react-icons/fa'; // Import icons
+import { toast } from "react-toastify";
 
-import { FaUser, FaCalendarAlt, FaVenusMars, FaTimes, FaHospital } from 'react-icons/fa'; // Import icons
-
-const RegisterProfileChild = ({ onClose, isOpen }) => {
+const RegisterProfileChild = ({ onClose, isOpen, parentInfo }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     if (!isOpen) return null; // Ẩn modal nếu chưa mở
 
     const onSubmit = async (data) => {
-        console.log(data)
+        const updatedData = {
+            ...data,
+            customerId: parentInfo.id,
+            parentName: parentInfo.fullname
+        };
+
+        const response = userService.registerChildProfile(updatedData);
+        if (!response) {
+            toast.error("❌ Đăng ký hồ sơ cho trẻ thất bại!");
+        } else {
+            toast.success("🎉 Đăng ký hồ sơ cho trẻ thành công!");
+            onClose();
+        }
     };
 
     return (
@@ -27,97 +44,137 @@ const RegisterProfileChild = ({ onClose, isOpen }) => {
                 </h1>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {/* Full Name */}
+                    {/* Họ và tên của trẻ */}
                     <div>
                         <label className="block text-gray-700 font-semibold mb-1">Họ và tên</label>
                         <div className="relative flex items-center border-b-2">
                             <FaUser className="text-gray-500 mr-3" />
                             <input
-                                {...register("fullname", { required: true })}
+                                {...register("childName", { required: true })}
                                 placeholder="Nhập họ và tên"
                                 className="w-full p-2 focus:outline-none"
                             />
                         </div>
-                        {errors.fullname && <span className="text-red-500 text-sm">Nhập họ và tên</span>}
+                        {errors.childName && <span className="text-red-500 text-sm">Nhập họ và tên</span>}
                     </div>
 
-                    {/* Gender */}
-                    <div>
-                        <label className="block text-gray-700 font-semibold mb-1">Giới tính</label>
-                        <div className="relative flex items-center border-b-2">
-                            <FaVenusMars className="text-gray-500 mr-3" />
-                            <select
-                                {...register("gender", { required: true })}
-                                className="w-full p-2 focus:outline-none text-center"
-                            >
-                                <option value="">----Chọn giới tính----</option>
-                                <option value="F">Nữ</option>
-                                <option value="M">Nam</option>
-                            </select>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        {/* Giới tính */}
+                        <div className="mt-3">
+                            <label className="block text-gray-700 font-semibold mb1 ">Giới tính</label>
+                            <div className="relative flex items-center border-b-2">
+                                <FaVenusMars className="text-gray-500 mr-3" />
+                                <select
+                                    {...register("childGender", { required: true })}
+                                    className="w-full p-2 focus:outline-none text-center"
+                                >
+                                    <option value="">----Chọn giới tính----</option>
+                                    <option value="F">Nữ</option>
+                                    <option value="M">Nam</option>
+                                </select>
+                            </div>
+                            {errors.childGender && <span className="text-red-500 text-sm">Chọn giới tính</span>}
                         </div>
-                        {errors.gender && <span className="text-red-500 text-sm">Chọn giới tính</span>}
-                    </div>
 
-                    {/* Date of Birth */}
-                    <div>
-                        <label className="block text-gray-700 font-semibold mb-1">Ngày sinh</label>
-                        <div className="relative flex items-center border-b-2">
-                            <FaCalendarAlt className="text-gray-500 mr-3" />
-                            <input
-                                {...register("birthday", { required: true })}
-                                type="date"
-                                className="w-full p-2 focus:outline-none"
-                            />
+                        {/* Ngày sinh */}
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-1">Ngày sinh</label>
+                            <div className="relative flex items-center border-b-2">
+                                <FaCalendarAlt className="text-gray-500 mr-3" />
+                                <input
+                                    {...register("dateOfBirth", { required: true })}
+                                    type="datetime-local"
+                                    className="w-full p-2 focus:outline-none"
+                                />
+                            </div>
+                            {errors.dateOfBirth && <span className="text-red-500 text-sm">Nhập ngày sinh</span>}
                         </div>
-                        {errors.birthday && <span className="text-red-500 text-sm">Nhập ngày sinh</span>}
                     </div>
 
-                    {/* birth Place */}
+
+                    {/* Nơi sinh */}
                     <div>
                         <label className="block text-gray-700 font-semibold mb-1">Nơi sinh</label>
                         <div className="relative flex items-center border-b-2">
                             <FaHospital className="text-gray-500 mr-3" />
                             <input
-                                {...register("fullname", { required: true })}
+                                {...register("birthPlace", { required: true })}
                                 placeholder="Nhập nơi sinh"
                                 className="w-full p-2 focus:outline-none"
                             />
                         </div>
-                        {errors.fullname && <span className="text-red-500 text-sm">Nhập nơi sinh</span>}
+                        {errors.birthPlace && <span className="text-red-500 text-sm">Nhập nơi sinh</span>}
                     </div>
 
-                    {/*birth Method */}
+                    {/* Phương pháp sinh */}
                     <div>
                         <label className="block text-gray-700 font-semibold mb-1">Phương pháp sinh</label>
                         <div className="relative flex items-center border-b-2">
                             <FaHospital className="text-gray-500 mr-3" />
-                            <input
-                                {...register("fullname", { required: true })}
-                                placeholder="Phương pháp sinh"
-                                className="w-full p-2 focus:outline-none"
-                            />
+                            <select
+                                {...register("birthMethod", { required: true })}
+                                className="w-full p-2 focus:outline-none text-center"
+                            >
+                                <option value="">----Chọn phương pháp sinh----</option>
+                                <option value="Sinh thường">Sinh thường</option>
+                                <option value="Sinh mổ">Sinh mổ</option>
+                            </select>
                         </div>
-                        {errors.fullname && <span className="text-red-500 text-sm">Phương pháp sinh</span>}
+                        {errors.birthMethod && <span className="text-red-500 text-sm">Chọn phương pháp sinh</span>}
                     </div>
 
 
-{/* cân nặng chiều cao */}
-<div>
-                        {/*birth Method */}
+
+                    <div className="grid grid-cols-2 gap-4">
+                        {/* Cân nặng khi sinh */}
                         <div>
-                        <label className="block text-gray-700 font-semibold mb-1">Phương pháp sinh</label>
+                            <label className="block text-gray-700 font-semibold mb-1">Cân nặng khi sinh (kg)</label>
+                            <div className="relative flex items-center border-b-2">
+                                <FaWeight className="text-gray-500 mr-3" />
+                                <input
+                                    {...register("birthWeight", { required: true, valueAsNumber: true })}
+                                    type="number"
+                                    step="0.1"
+                                    placeholder="Nhập cân nặng (kg)"
+                                    className="w-full p-2 focus:outline-none"
+                                />
+                            </div>
+                            {errors.birthWeight && <span className="text-red-500 text-sm">Nhập cân nặng hợp lệ</span>}
+                        </div>
+
+                        {/* Chiều cao khi sinh */}
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-1">Chiều cao khi sinh (cm)</label>
+                            <div className="relative flex items-center border-b-2">
+                                <FaRulerVertical className="text-gray-500 mr-3" />
+                                <input
+                                    {...register("birthHeight", { required: true, valueAsNumber: true })}
+                                    type="number"
+                                    step="0.1"
+                                    placeholder="Nhập chiều cao (cm)"
+                                    className="w-full p-2 focus:outline-none"
+                                />
+                            </div>
+                            {errors.birthHeight && <span className="text-red-500 text-sm">Nhập chiều cao hợp lệ</span>}
+                        </div>
+                    </div>
+
+
+                    {/* Bất thường khi sinh */}
+                    <div>
+                        <label className="block text-gray-700 font-semibold mb-1">Bất thường khi sinh</label>
                         <div className="relative flex items-center border-b-2">
-                            <FaHospital className="text-gray-500 mr-3" />
+                            <FaExclamationTriangle className="text-gray-500 mr-3" />
                             <input
-                                {...register("fullname", { required: true })}
-                                placeholder="Phương pháp sinh"
+                                {...register("abnormalities")}
+                                placeholder="Ghi chú (nếu có)"
                                 className="w-full p-2 focus:outline-none"
                             />
                         </div>
-                        {errors.fullname && <span className="text-red-500 text-sm">Phương pháp sinh</span>}
                     </div>
-</div>
-                    {/* Submit Button */}
+
+                    {/* Nút Submit */}
                     <button
                         type="submit"
                         className="w-full bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg font-semibold transition"
@@ -125,8 +182,9 @@ const RegisterProfileChild = ({ onClose, isOpen }) => {
                         Đăng ký
                     </button>
                 </form>
-            </div>
-        </div>
+
+            </div >
+        </div >
     );
 }
 

@@ -8,6 +8,12 @@ export const userService = {
             }
         });
         return response.data;
+    },
+    registerChildProfile: async (data) => {
+        const response = await axiosClient.post('/api/user/vac-record',
+            data
+        )
+        return response.data;
     }
 }
 

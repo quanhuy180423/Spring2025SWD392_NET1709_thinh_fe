@@ -277,6 +277,7 @@ const UserProfile = () => {
 
       {/* Modal đăng ký tài khoảng cho trẻ em */}
       <RegisterProfileChild
+        parentInfo={userData}
         isOpen={isModalRegister}
         onClose={() => setIsModalRegister(false)} />
     </div>
