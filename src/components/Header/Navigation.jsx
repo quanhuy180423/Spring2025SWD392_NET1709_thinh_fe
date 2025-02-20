@@ -7,6 +7,7 @@ const sectionNames = {
     "price List": "Bảng giá",
     "registerVaccination": "Đăng ký tiêm",
     "about Us": "Giới thiệu",
+    blog: "Blog",
 };
 
 const Navigation = () => {

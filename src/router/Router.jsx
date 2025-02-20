@@ -14,6 +14,7 @@ import DashBoardPage from "@pages/adminPage/DashboardPage/index.jsx";
 import LayoutCus from "@layouts/LayoutCus.jsx";
 import UserProfile from "@containers/customer/ProfileCus/index.jsx";
 import RegisterProfileChildPage from "@pages/RegisterProfileChildPage/index.jsx";
+import BlogPage from "@pages/BlogPage/index.jsx";
 
 const Router = createBrowserRouter(
   [
@@ -29,6 +30,7 @@ const Router = createBrowserRouter(
         { path: routes.vaccinationGuide, element: <VaccinationGuidePage /> },
         { path: routes.service, element: <Counter /> },
         { path: routes.aboutUs, element: <AboutUsPage /> },
+        { path: routes.blog, element: <BlogPage /> },
       ],
     },
     {

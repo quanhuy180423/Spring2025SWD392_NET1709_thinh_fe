@@ -9,9 +9,10 @@ const routes = {
 
   vaccinationGuide: "/vaccination-guide",
   service: "/services",
+  blog: "/blog",
   user: {
     profile: "/user/profile",
-    registerProfileChild: '/user/register-profile-child',
+    registerProfileChild: "/user/register-profile-child",
   },
   admin: {
     dashboard: "/admin",
