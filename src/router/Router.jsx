@@ -15,14 +15,20 @@ import LayoutCus from "@layouts/LayoutCus.jsx";
 import UserProfile from "@containers/customer/ProfileCus/index.jsx";
 import RegisterProfileChildPage from "@pages/RegisterProfileChildPage/index.jsx";
 import BlogPage from "@pages/BlogPage/index.jsx";
+import ProtectedRoute from "@containers/auth/ProtectedRoute/index.jsx";
+import NotFound from "@containers/NotFound/index.jsx";
 
+const user = localStorage.getItem('userData');
+const userRole = JSON.parse(user || '{}').role;
 const Router = createBrowserRouter(
+
   [
     {
       path: routes.home,
       element: <LayoutMain />,
       children: [
         { path: routes.home, element: <HomePage /> },
+        { path: routes.notFound, element: <NotFound /> },
         {
           path: routes.registerVaccination,
           element: <RegisterVaccinationPage />,
@@ -43,7 +49,7 @@ const Router = createBrowserRouter(
     },
     {
       path: routes.user.profile.split("/")[1],
-      element: <LayoutCus />,
+      element: <ProtectedRoute role={userRole} allowedRoles={['CUSTOMER']} ><LayoutCus /></ProtectedRoute>,
       children: [
         { path: routes.user.profile.split("/")[2], element: <UserProfile /> },
         { path: routes.user.registerProfileChild.split("/")[2], element: <RegisterProfileChildPage /> }
@@ -52,7 +58,7 @@ const Router = createBrowserRouter(
     },
     {
       path: routes.admin.dashboard,
-      element: <LayoutAdmin />,
+      element: <ProtectedRoute role={userRole} allowedRoles={['ADMIN', 'MANAGER']} ><LayoutAdmin /></ProtectedRoute>,
       children: [{ path: routes.admin.dashboard, element: <DashBoardPage /> }],
     },
   ],

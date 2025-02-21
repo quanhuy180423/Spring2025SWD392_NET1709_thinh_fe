@@ -1,29 +1,29 @@
-import { Link } from "react-scroll";
+import routes from "@src/router/index.js";
+import { Link } from "react-router-dom";
 
 const sectionNames = {
-    home: "Trang chủ",
-    guide: "Hướng dẫn",
-    service: "Dịch vụ",
-    "price List": "Bảng giá",
-    "registerVaccination": "Đăng ký tiêm",
-    "about Us": "Giới thiệu",
-    blog: "Blog",
+    home: { path: routes.home, label: "Trang chủ" },
+    aboutUs: { path: routes.aboutUs, label: "Giới thiệu" },
+    guide: { path: routes.vaccinationGuide, label: "Hướng dẫn" },
+    priceList: { path: routes.notFound, label: "Bảng giá" },
+    service: { path: routes.notFound, label: "Dịch vụ" },
+    blog: { path: routes.blog, label: "Blog" },
+    registerVaccination: { path: routes.registerVaccination, label: "Đăng ký tiêm" },
 };
 
-const Navigation = () => {
+const Navigation = ({ onItemClick }) => {
     return (
-        <ul className="list-none gap-6 sm:flex">
-            {Object.entries(sectionNames).map(([section, displayName]) => (
-                <li key={section} className="text-lg text-left text-blue-500 md:text-white font-medium md:text-center cursor-pointer relative my-2">
+        <ul className="list-none flex flex-col sm:flex-row  sm:gap-6">
+            {Object.entries(sectionNames).map(([key, { path, label }]) => (
+                <li key={key} className="relative my-2">
                     <Link
-                        to={section}
-                        spy={true}
-                        smooth={true}
-                        duration={500}
-                        offset={-70}
-                        className="hover:text-teal-500 relative after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
+                        to={path}
+                        onClick={onItemClick} // Đóng menu và chuyển trang
+                        className="text-sm sm:text-base md:text-lg lg:text-xl font-medium hover:text-teal-500 text-white relative after:absolute after:left-0 after:bottom-0 
+                        after:w-0 after:h-[2px] after:bg-teal-500 after:transition-all after:duration-300 
+                        hover:after:w-full"
                     >
-                        {displayName}
+                        {label}
                     </Link>
                 </li>
             ))}
