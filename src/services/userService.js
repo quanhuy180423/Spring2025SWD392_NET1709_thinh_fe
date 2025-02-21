@@ -21,6 +21,11 @@ export const userService = {
     return response.reverse();
   },
 
+  getChildById: async (id) => {
+    const reponse = await axiosClient.get(`/api/user/vac-record?id=${id}`)
+    return reponse;
+  },
+
   updateChildProfile: async (data) => {
     const response = await axiosClient.patch("/api/user/vac-record", data);
     return response;

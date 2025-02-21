@@ -1,4 +1,5 @@
 import { userService } from "@src/services/userService.js";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
     FaUser, FaCalendarAlt, FaVenusMars, FaTimes,
@@ -9,24 +10,42 @@ import { toast } from "react-toastify";
 const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
+    useEffect(() => {
+        const fetchChild = async () => {
+            const reponse = await userService.getChildById(childInfo);
+            setValue("childName", reponse.childName);
+            setValue("childGender", reponse.childGender);
+            setValue("dateOfBirth", reponse.dateOfBirth);
+            setValue("birthPlace", reponse.birthPlace);
+            setValue("birthMethod", reponse.birthMethod);
+            setValue("birthWeight", reponse.birthWeight);
+            setValue("birthHeight", reponse.birthHeight);
+            setValue("abnormalities", reponse.abnormalities);
+
+        }
+
+        fetchChild();
+    }, []);
+
+
     // Set default values for the form if childInfo is provided
-    if (childInfo) {
-        setValue("childName", childInfo.childName);
-        setValue("childGender", childInfo.childGender);
-        setValue("dateOfBirth", childInfo.dateOfBirth);
-        setValue("birthPlace", childInfo.birthPlace);
-        setValue("birthMethod", childInfo.birthMethod);
-        setValue("birthWeight", childInfo.birthWeight);
-        setValue("birthHeight", childInfo.birthHeight);
-        setValue("abnormalities", childInfo.abnormalities);
-    }
+    // if (childInfo) {
+    //     setValue("childName", childInfo.childName);
+    //     setValue("childGender", childInfo.childGender);
+    //     setValue("dateOfBirth", childInfo.dateOfBirth);
+    //     setValue("birthPlace", childInfo.birthPlace);
+    //     setValue("birthMethod", childInfo.birthMethod);
+    //     setValue("birthWeight", childInfo.birthWeight);
+    //     setValue("birthHeight", childInfo.birthHeight);
+    //     setValue("abnormalities", childInfo.abnormalities);
+    // }
 
     if (!isOpen) return null; // Ẩn modal nếu chưa mở
 
     const onSubmit = async (data) => {
         const updatedData = {
             ...data,
-            id: childInfo.id, // Giữ lại ID của trẻ để cập nhật
+            id: childInfo, // Giữ lại ID của trẻ để cập nhật
         };
 
         const response = await userService.updateChildProfile(updatedData); // Sử dụng API update

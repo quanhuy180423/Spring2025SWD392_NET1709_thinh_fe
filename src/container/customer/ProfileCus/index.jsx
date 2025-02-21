@@ -318,7 +318,7 @@ const UserProfile = () => {
                   <td className="border px-4 py-2">{child.abnormalities}</td>
                   <td className="border px-4 py-2">
                     <button
-                      onClick={() => handleEditChild(child)}
+                      onClick={() => handleEditChild(child.id)}
                       className="bg-[rgb(33,103,221)] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                     >
                       Sửa
