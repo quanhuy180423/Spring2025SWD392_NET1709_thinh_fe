@@ -1,52 +1,66 @@
-import { useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { FaUser, FaCalendarAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { userService } from "@src/services/userService.js";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import StepIndicator from "./Steper.jsx";
+import SelectChild from "./Step/Step1.jsx";
+import SelectVaccine from "./Step/Step2.jsx";
+import ConfirmInfo from "./Step/Step3.jsx";
+
 
 const RegisterVaccination = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [isForRelative, setIsForRelative] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [step, setStep] = useState(1);
+  const [listChild, setListChild] = useState([]);
+  const [selectedChild, setSelectedChild] = useState(null);
+  const [selectedVaccines, setSelectedVaccines] = useState([]);
+  
+  const Parent = localStorage.getItem("userDataNhanAi");
+  const idParent = JSON.parse(Parent).id;
 
-    const onSubmit = (data) => {
-        console.log(data);
+  useEffect(() => {
+    const fetchChildren = async () => {
+      try {
+        const response = await userService.getAllChildProfile(idParent);
+        setListChild(response);
+      } catch (error) {
+        console.error(error);
+      }
     };
+    fetchChildren();
+  }, []);
 
-    return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-900">
-          <div className="bg-gray-300 p-8 rounded-lg w-[500px] text-center">
-            <h2 className="text-xl font-bold mb-4">Đăng ký tiêm chủng</h2>
-            
-            <div className="text-left mb-4">
-              <label className="font-semibold">Chọn người tiêm:</label>
-              <div className="bg-gray-400 text-white p-2 mt-1 rounded">Select your child</div>
-            </div>
-            
-            <h3 className="text-lg font-semibold mb-2">Thông tin của child</h3>
-            <div className="grid grid-cols-2 gap-2 mb-4">
-              <div className="bg-gray-400 text-white p-2 rounded">Name</div>
-              <div className="bg-gray-400 text-white p-2 rounded">Name</div>
-              <div className="bg-gray-400 text-white p-2 rounded">Name</div>
-              <div className="bg-gray-400 text-white p-2 rounded">Name</div>
-            </div>
-            
-            <div className="text-left mb-4">
-              <label className="font-semibold">Chọn Vaccine:</label>
-              <div className="bg-gray-400 text-white p-2 mt-1 rounded">Select vaccine</div>
-            </div>
-            
-            <div className="text-left mb-4">
-              <label className="font-semibold">Chọn ngày tiêm:</label>
-              <div className="bg-gray-400 text-white p-2 mt-1 rounded">18/04/2024</div>
-            </div>
-            
-            <div className="text-left mb-4">
-              <label className="font-semibold">Chọn ngày tiêm:</label>
-              <div className="bg-gray-400 text-white p-2 mt-1 rounded">14:00</div>
-            </div>
-            
-            <button className="bg-gray-400 text-white px-4 py-2 rounded">Submit</button>
-          </div>
+  const onSubmit = (data) => {
+    console.log({ selectedChild, selectedVaccines, ...data });
+  };
+
+  return (
+    <div className="flex flex-col items-center my-3 h-screen  p-6">
+      <div className="w-screen max-w-4xl min-w-min text-center">
+
+        <div className="bg-white p-8 rounded-lg shadow-2xl">
+          <StepIndicator step={step} />
+          {step === 1 && <SelectChild listChild={listChild} setSelectedChild={setSelectedChild} selectedChild={selectedChild} />}
+          {step === 2 && <SelectVaccine selectedVaccines={selectedVaccines} setSelectedVaccines={setSelectedVaccines} />}
+          {step === 3 && <ConfirmInfo selectedChild={selectedChild} selectedVaccines={selectedVaccines} register={register} errors={errors} />}
         </div>
-      );
+        <div className="mt-4 flex justify-between">
+          {step > 1 && (
+            <button className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500" onClick={() => setStep(step - 1)}>
+              Quay lại
+            </button>
+          )}
+          {step < 3 ? (
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" onClick={() => { setStep(step + 1); console.log(selectedChild) }}>
+              Tiếp tục
+            </button>
+          ) : (
+            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" onClick={handleSubmit(onSubmit)}>
+              Đăng ký
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
-
 export default RegisterVaccination;

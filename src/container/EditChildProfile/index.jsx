@@ -8,12 +8,12 @@ import {
 import { toast } from "react-toastify";
 import { Modal, Box, Typography, Button } from "@mui/material";
 
-const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
+const EditProfileChild = ({ onClose, isOpen, childId }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
-
+    console.log(childId)
     useEffect(() => {
         const fetchChild = async () => {
-            const reponse = await userService.getChildById(childInfo);
+            const reponse = await userService.getChildById(childId);
             setValue("childName", reponse.childName);
             setValue("childGender", reponse.childGender);
             setValue("dateOfBirth", reponse.dateOfBirth);
@@ -22,11 +22,10 @@ const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
             setValue("birthWeight", reponse.birthWeight);
             setValue("birthHeight", reponse.birthHeight);
             setValue("abnormalities", reponse.abnormalities);
-
         }
 
         fetchChild();
-    }, []);
+    }, [childId]);
 
 
     // Set default values for the form if childInfo is provided
@@ -46,7 +45,7 @@ const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
     const onSubmit = async (data) => {
         const updatedData = {
             ...data,
-            id: childInfo, // Giữ lại ID của trẻ để cập nhật
+            id: childId, // Giữ lại ID của trẻ để cập nhật
         };
 
         const response = await userService.updateChildProfile(updatedData); // Sử dụng API update
@@ -101,7 +100,7 @@ const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
                             <label>Ngày sinh</label>
                             <div className="relative flex items-center border-b">
                                 <FaCalendarAlt className="text-gray-500 mr-3" />
-                                <input {...register("dateOfBirth", { required: true })} type="datetime-local" />
+                                <input {...register("dateOfBirth", { required: true })} type="date" />
                             </div>
                         </div>
                     </div>

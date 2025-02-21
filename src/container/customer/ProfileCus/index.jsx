@@ -81,7 +81,6 @@ const UserProfile = () => {
         <button
           onClick={() => {
             setIsModalRegister(true);
-            console.log(isModalRegister);
           }}
           className="bg-[rgb(33,103,221)] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-6 mr-4"
         >
@@ -393,7 +392,7 @@ const UserProfile = () => {
           setIsEditModalOpen(false);
           setCount(count + 1);
         }}
-        childInfo={selectedChild}
+        childId={selectedChild}
       />
     </div>
   );

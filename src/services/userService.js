@@ -7,7 +7,7 @@ export const userService = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
-    localStorage.setItem("userData", JSON.stringify(response.data))
+    localStorage.setItem("userDataNhanAi", JSON.stringify(response.data))
     return response.data;
   },
   
