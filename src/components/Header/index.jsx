@@ -7,7 +7,7 @@ import MobileMenu from "./MobileMenu.jsx";
 const Header = () => {
 
     return (
-        <header className="flex items-center justify-between p-4 bg-[rgb(33,103,221)] shadow-md ">
+        <header className="flex items-center justify-between p-3 bg-[rgb(33,103,221)] shadow-md ">
             {/* Logo */}
             <div className="flex items-center gap-2 px-2 cursor-pointer mlg:w-full">
                 <Link to="/">
@@ -17,7 +17,7 @@ const Header = () => {
             </div>
 
             {/* Navigation Links (Ẩn trên mobile) */}
-            <div className="hidden md:flex ml-10">
+            <div className="hidden md:flex">
                 <Navigation />
             </div>
 
