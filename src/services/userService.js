@@ -7,7 +7,7 @@ export const userService = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
-    localStorage.setItem("userData", JSON.stringify(response.data))
+    localStorage.setItem("userDataNhanAi", JSON.stringify(response.data))
     return response.data;
   },
   
@@ -21,6 +21,11 @@ export const userService = {
       `/api/user/vac-records?userId=${id}`
     );
     return response.reverse();
+  },
+
+  getChildById: async (id) => {
+    const reponse = await axiosClient.get(`/api/user/vac-record?id=${id}`)
+    return reponse;
   },
 
   updateChildProfile: async (data) => {

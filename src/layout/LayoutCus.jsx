@@ -6,7 +6,7 @@ const LayoutCus = () => {
         <div>
 
             <main className="flex">
-                <div className="w-[20rem] sticky top-0">
+                <div className="md:w-3/12 sm:w-1/12  min-h-screen sticky top-0">
                     <SidebarCus />
                 </div>
                 <div className="w-screen container m-6 shadow-xl bg-slate-100">

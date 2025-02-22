@@ -47,7 +47,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="h-screen bg-gradient-to-b text-blue-400 shadow-lg flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b text-blue-400 shadow-lg flex flex-col">
       <div className="mt-3">
         <div className="flex items-center justify-center gap-2 px-2 cursor-pointer mlg:w-full">
           <Link to="/">

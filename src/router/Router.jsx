@@ -18,8 +18,9 @@ import BlogPage from "@pages/BlogPage/index.jsx";
 import ProtectedRoute from "@containers/auth/ProtectedRoute/index.jsx";
 import NotFound from "@containers/NotFound/index.jsx";
 
-const user = localStorage.getItem('userData');
+const user = localStorage.getItem('userDataNhanAi');
 const userRole = JSON.parse(user || '{}').role;
+
 const Router = createBrowserRouter(
 
   [

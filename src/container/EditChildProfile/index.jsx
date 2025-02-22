@@ -1,4 +1,5 @@
 import { userService } from "@src/services/userService.js";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
     FaUser, FaCalendarAlt, FaVenusMars, FaTimes,
@@ -7,23 +8,47 @@ import {
 import { toast } from "react-toastify";
 import { Modal, Box, Typography, Button } from "@mui/material";
 
-const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
+const EditProfileChild = ({ onClose, isOpen, childId }) => {
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+    console.log(childId)
+    useEffect(() => {
+        const fetchChild = async () => {
+            const reponse = await userService.getChildById(childId);
+            setValue("childName", reponse.childName);
+            setValue("childGender", reponse.childGender);
+            setValue("dateOfBirth", reponse.dateOfBirth);
+            setValue("birthPlace", reponse.birthPlace);
+            setValue("birthMethod", reponse.birthMethod);
+            setValue("birthWeight", reponse.birthWeight);
+            setValue("birthHeight", reponse.birthHeight);
+            setValue("abnormalities", reponse.abnormalities);
+        }
 
-    if (childInfo) {
-        setValue("childName", childInfo.childName);
-        setValue("childGender", childInfo.childGender);
-        setValue("dateOfBirth", childInfo.dateOfBirth);
-        setValue("birthPlace", childInfo.birthPlace);
-        setValue("birthMethod", childInfo.birthMethod);
-        setValue("birthWeight", childInfo.birthWeight);
-        setValue("birthHeight", childInfo.birthHeight);
-        setValue("abnormalities", childInfo.abnormalities);
-    }
+        fetchChild();
+    }, [childId]);
+
+
+    // Set default values for the form if childInfo is provided
+    // if (childInfo) {
+    //     setValue("childName", childInfo.childName);
+    //     setValue("childGender", childInfo.childGender);
+    //     setValue("dateOfBirth", childInfo.dateOfBirth);
+    //     setValue("birthPlace", childInfo.birthPlace);
+    //     setValue("birthMethod", childInfo.birthMethod);
+    //     setValue("birthWeight", childInfo.birthWeight);
+    //     setValue("birthHeight", childInfo.birthHeight);
+    //     setValue("abnormalities", childInfo.abnormalities);
+    // }
+
+    if (!isOpen) return null; // Ẩn modal nếu chưa mở
 
     const onSubmit = async (data) => {
-        const updatedData = { ...data, id: childInfo.id };
-        const response = await userService.updateChildProfile(updatedData);
+        const updatedData = {
+            ...data,
+            id: childId, // Giữ lại ID của trẻ để cập nhật
+        };
+
+        const response = await userService.updateChildProfile(updatedData); // Sử dụng API update
         if (!response) {
             toast.error("❌ Cập nhật hồ sơ cho trẻ thất bại!");
         } else {
@@ -75,7 +100,7 @@ const EditProfileChild = ({ onClose, isOpen, childInfo }) => {
                             <label>Ngày sinh</label>
                             <div className="relative flex items-center border-b">
                                 <FaCalendarAlt className="text-gray-500 mr-3" />
-                                <input {...register("dateOfBirth", { required: true })} type="datetime-local" />
+                                <input {...register("dateOfBirth", { required: true })} type="date" />
                             </div>
                         </div>
                     </div>
