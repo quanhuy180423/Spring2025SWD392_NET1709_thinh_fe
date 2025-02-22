@@ -1,6 +1,9 @@
 name: Deploy
 
 on:
+  push:
+      branches:
+        - main # 🔄 Mỗi lần push lên main, workflow sẽ chạy
   workflow_dispatch:
     inputs:
       secrets_txt:
