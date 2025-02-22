@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "../../services/authService";
+import { userService } from "@src/services/userService.js";
 
 export const loginUser = createAsyncThunk(
   "auth/login",
@@ -23,10 +24,22 @@ export const registerUser = createAsyncThunk(
   }
 )
 
+export const fetchUser = createAsyncThunk(
+  "auth/getMe",
+  async (accessToken, { rejectWithValue }) => {
+    try {
+      return await userService.getUser(accessToken); // Gửi accessToken để lấy user
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    //user: authService.getCurrentUser(),
+    user: null,
+    accessToken: null,
     isAuthenticated: authService.isAuthenticated(),
     status: "idle",
     error: null,
@@ -35,7 +48,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.isAuthenticated = false;
-  },
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,6 +62,20 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+
+      // Xử lý getMe
+      .addCase(fetchUser.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.user = action.payload;
+        state.isAuthenticated = true;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
       });

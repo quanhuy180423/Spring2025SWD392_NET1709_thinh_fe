@@ -7,10 +7,10 @@ export const userService = {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     });
-    localStorage.setItem("userDataNhanAi", JSON.stringify(response.data))
+      localStorage.setItem("userDataNhanAi", JSON.stringify(response.data))
     return response.data;
   },
-  
+
   registerChildProfile: async (data) => {
     const response = await axiosClient.post("/api/user/vac-record", data);
     return response.data;

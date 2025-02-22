@@ -5,6 +5,7 @@ import { formatDate } from "@utils/format.js";
 import ChangePasswordModal from "@src/components/Modal/index.jsx";
 import RegisterProfileChild from "@containers/RegisterProfileChild/index.jsx";
 import EditProfileChild from "@containers/EditChildProfile/index.jsx";
+import { CircularProgress } from "@mui/material";
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -65,7 +66,7 @@ const UserProfile = () => {
   };
 
   if (loading) {
-    return <div className="text-center text-gray-600">Loading...</div>;
+    return <div className="flex h-screen items-center justify-center"><CircularProgress size="6rem" /></div>;
   }
 
   if (error) {
@@ -75,7 +76,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="h-full mx-auto bg-white rounded-lg p-6 overflow-y-auto">
+    <div className="h-full mx-auto bg-white rounded-lg p-6">
       <div className="flex flex-row justify-between items-center">
         <h2 className="text-2xl font-semibold mb-6">Thông tin khách hàng</h2>
         <button
