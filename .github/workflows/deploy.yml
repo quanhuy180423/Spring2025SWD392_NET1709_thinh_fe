@@ -2,8 +2,8 @@ name: Deploy
 
 on:
   push:
-      branches:
-        - main # 🔄 Mỗi lần push lên main, workflow sẽ chạy
+    branches:
+      - main # 🔄 Mỗi lần push lên main, workflow sẽ chạy
   workflow_dispatch:
     inputs:
       secrets_txt:
@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Đọc secrets từ input
+        if: github.event_name == 'workflow_dispatch'
         run: |
           echo "${{ inputs.secrets_txt }}" > secrets.txt
           while IFS='=' read -r key value; do
@@ -27,6 +28,17 @@ jobs:
               echo "$key=$value" >> $GITHUB_ENV
             fi
           done < secrets.txt
+
+      - name: Đọc secrets từ .env.example nếu là push
+        if: github.event_name == 'push'
+        run: |
+          if [ -f .env.example ]; then
+            while IFS='=' read -r key value; do
+              if [[ -n "$key" && -n "$value" && ! "$key" =~ ^# ]]; then
+                echo "$key=$value" >> $GITHUB_ENV
+              fi
+            done < .env.example
+          fi
 
       - name: Cài node 📦
         uses: actions/setup-node@v3
@@ -36,6 +48,11 @@ jobs:
 
       - name: 🔍 Tìm tên repository
         run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+
+      - name: Thiết lập biến môi trường mặc định
+        if: github.event_name == 'push'
+        run: |
+          echo "DEFAULT_ENV=production" >> $GITHUB_ENV
 
       - name: Build dự án 🏗️
         run: npm run build
@@ -50,7 +67,6 @@ jobs:
     name: Deploy 🚀
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Tải artifact 🐈‍⬛
