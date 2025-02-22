@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - main # 🔄 Mỗi lần push lên main, workflow sẽ chạy
+      - main
   workflow_dispatch:
     inputs:
       secrets_txt:
@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Kiểm tra repo 🛎️
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Đọc secrets từ input hoặc .env.example
+      - name: Import secrets
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "${{ inputs.secrets_txt }}" ]; then
             echo "${{ inputs.secrets_txt }}" > secrets.txt
@@ -35,24 +35,19 @@ jobs:
             done < secrets.txt
           fi
 
-      - name: Check secrets 🔑
-        run: |
-          echo "Available Secrets:"
-          env | grep -E '^[A-Z0-9_]+=' | cut -d= -f1 | sort
-
-      - name: Cài node 📦
+      - name: Node setup
         uses: actions/setup-node@v3
 
-      - name: Cài dependencies 🪛
+      - name: Install dependencies
         uses: bahmutov/npm-install@v1
 
-      - name: 🔍 Tìm tên repository
+      - name: Repository name
         run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
 
-      - name: Build dự án 🏗️
+      - name: Build project
         run: npm run build
 
-      - name: Đẩy lên production 📂
+      - name: Production files
         uses: actions/upload-artifact@v4
         with:
           name: production-files
@@ -64,13 +59,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Tải artifact 🐈‍⬛
+      - name: Artifacts upload
         uses: actions/download-artifact@v4
         with:
           name: production-files
           path: ./dist
 
-      - name: Deploy lên nhánh gh-pages 🌐
+      - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
