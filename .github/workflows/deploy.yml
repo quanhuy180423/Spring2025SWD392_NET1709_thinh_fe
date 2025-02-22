@@ -11,9 +11,6 @@ jobs:
     name: Build file 🔨
     runs-on: ubuntu-latest
 
-    env:
-      VITE_API_URL: ${{ secrets.VITE_API_URL }}
-
     steps:
       - name: Kiểm tra repo 🛎️
         uses: actions/checkout@v3
