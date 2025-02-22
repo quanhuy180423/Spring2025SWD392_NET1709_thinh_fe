@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: ${{ steps.set-url.outputs.url }}
+      url: ${{ env.DEPLOY_URL }}
 
     steps:
       - name: Artifacts upload
@@ -67,16 +67,14 @@ jobs:
         with:
           name: production-files
           path: ./dist
+
       - name: Check for CNAME
-        id: set-url
-        run: |
-          if [ -f ./dist/CNAME ]; then
-            echo "url=https://$(cat ./dist/CNAME)" >> $GITHUB_ENV
-            echo "::set-output name=url::https://$(cat ./dist/CNAME)"
-          else
-            echo "url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_ENV
-            echo "::set-output name=url::https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-          fi
+          run: |
+            if [ -f ./dist/CNAME ]; then
+              echo "DEPLOY_URL=https://$(cat ./dist/CNAME)" >> $GITHUB_ENV
+            else
+              echo "DEPLOY_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_ENV
+            fi
 
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v3
