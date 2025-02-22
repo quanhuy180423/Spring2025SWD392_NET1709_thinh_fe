@@ -1,4 +1,5 @@
-import RegisterVaccination from '@containers/RegisterVaccination/index.jsx'
+import RegisterVaccination from "@containers/RegisterVaccination/index.jsx"
+
 
 const RegisterVaccinationPage = () => {
   return (

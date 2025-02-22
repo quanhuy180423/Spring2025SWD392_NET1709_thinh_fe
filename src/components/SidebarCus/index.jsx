@@ -1,8 +1,7 @@
 import { Assets } from "@src/assets/Assets.js";
 import routes from "@src/router/index.js";
-import { userService } from "@src/services/userService.js";
 import { logout } from "@src/stores/slices/authSlice.js";
-import { useEffect, useState } from "react";
+
 import {
   FaClipboardList,
   FaSignOutAlt,
@@ -14,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
-  const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Danh sách chức năng với icon và đường dẫn
@@ -38,16 +36,11 @@ const Sidebar = () => {
     navigate(routes.auth.login);
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await userService.getUser();
-      setUserData(response);
-    };
-    fetchUser();
-  }, []);
+  const user = localStorage.getItem("userDataNhanAi");
+  const username = JSON.parse(user || '{}').fullname;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b text-blue-400 shadow-lg flex flex-col">
+    <div className="min-h-screen sticky top-0 bg-gradient-to-b text-blue-400 shadow-lg flex flex-col">
       <div className="mt-3">
         <div className="flex items-center justify-center gap-2 px-2 cursor-pointer mlg:w-full">
           <Link to="/">
@@ -65,7 +58,7 @@ const Sidebar = () => {
         <div className="p-3">
           <Link className="flex items-center justify-center gap-4">
             <FaUser size={25} />
-            <h2 className="text-2xl font-bold">{userData?.fullname}</h2>
+            <h2 className="text-2xl font-bold">{username}</h2>
           </Link>
         </div>
       </div>

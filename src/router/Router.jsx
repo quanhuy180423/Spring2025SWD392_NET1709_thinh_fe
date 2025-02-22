@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "@pages/HomePage";
 import LayoutMain from "@layouts/LayoutMain";
@@ -5,7 +6,7 @@ import LayoutAuth from "@layouts/LayoutAuth";
 import LoginPage from "@pages/LoginPage";
 import RegisterPage from "@pages/RegitserPage/index.jsx";
 import routes from "./index.js";
-import RegisterVaccinationPage from "../page/RegisterVaccinationPage";
+const RegisterVaccinationPage = lazy(() => import('@pages/RegisterVaccinationPage/index.jsx'))
 import VaccinationGuidePage from "@pages/VaccinationGuide";
 import Counter from "@components/test/Counter";
 import AboutUsPage from "@pages/AboustUsPage/index.jsx";
@@ -18,11 +19,10 @@ import BlogPage from "@pages/BlogPage/index.jsx";
 import ProtectedRoute from "@containers/auth/ProtectedRoute/index.jsx";
 import NotFound from "@containers/NotFound/index.jsx";
 
-const user = localStorage.getItem('userDataNhanAi');
-const userRole = JSON.parse(user || '{}').role;
 
+const user = localStorage.getItem("userDataNhanAi");
+const userRole = JSON.parse(user || '{}').role || 'GUEST';
 const Router = createBrowserRouter(
-
   [
     {
       path: routes.home,

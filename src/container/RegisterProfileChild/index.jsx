@@ -75,7 +75,7 @@ const RegisterProfileChild = ({ onClose, isOpen, parentInfo }) => {
 
             {/* Ngày sinh */}
             <TextField
-              type="date"
+              type="datetime-local"
               label="Ngày sinh"
               fullWidth
               variant="outlined"
