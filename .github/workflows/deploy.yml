@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy🪽
 
 on:
   push:
@@ -12,12 +12,10 @@ on:
 
 jobs:
   build:
-    name: Build file 🔨
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.7
 
       - name: Import secrets
         run: |
@@ -35,39 +33,62 @@ jobs:
             done < secrets.txt
           fi
 
-      - name: Node setup
-        uses: actions/setup-node@v3
+      - name: Node.js setup
+        uses: actions/setup-node@v4.0.2
 
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+      - name: Dependencies install
+        run: |
+          if [ -f yarn.lock ]; then
+            yarn install
+          else
+            npm install
+          fi
 
-      - name: Repository name
-        run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+      - name: Detect framework & build
+        run: |
+          if [ -f vite.config.ts ] || [ -f vite.config.js ]; then
+            echo "Detected Vite project"
+            yarn run build || npm run build
+            echo "VITE_PROJECT=true" >> $GITHUB_ENV
+          elif [ -f next.config.js ] || [ -f next.config.ts ]; then
+            echo "Detected Next.js project"
+            yarn run build || npm run build
+            touch ./out/.nojekyll
+            echo "NEXT_PROJECT=true" >> $GITHUB_ENV
+          else
+            echo "Unsupported framework!" && exit 1
+          fi
 
-      - name: Build project
-        run: npm run build
-
-      - name: Production files
+      - name: Upload build artifacts (for Vite)
+        if: env.VITE_PROJECT == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: production-files
           path: ./dist
 
   deploy:
-    name: Deploy 🚀
     needs: build
     runs-on: ubuntu-latest
-
+    if: github.ref == 'refs/heads/main'
     steps:
-      - name: Artifacts upload
+      - name: Upload build artifacts (for Vite)
+        if: env.VITE_PROJECT == 'true'
         uses: actions/download-artifact@v4
         with:
           name: production-files
           path: ./dist
 
-      - name: Deploy gh-pages
+      - name: Deploy GitHub Pages (Vite)
+        if: env.VITE_PROJECT == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: production
+
+      - name: Deploy GitHub Pages (Next.js)
+        if: env.NEXT_PROJECT == 'true'
+        uses: JamesIves/github-pages-deploy-action@v4.6.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: public
+          folder: out
