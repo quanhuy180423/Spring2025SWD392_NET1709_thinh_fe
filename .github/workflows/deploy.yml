@@ -35,6 +35,9 @@ jobs:
             done < secrets.txt
           fi
 
+      - name: Check env 🔍
+        run: env | sort
+
       - name: Cài node 📦
         uses: actions/setup-node@v3
 
