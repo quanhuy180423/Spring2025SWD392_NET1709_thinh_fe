@@ -35,8 +35,10 @@ jobs:
             done < secrets.txt
           fi
 
-      - name: Check env 🔍
-        run: env | sort
+      - name: Check secrets 🔑
+        run: |
+          echo "Available Secrets:"
+          env | grep -E '^[A-Z0-9_]+=' | cut -d= -f1 | sort
 
       - name: Cài node 📦
         uses: actions/setup-node@v3
