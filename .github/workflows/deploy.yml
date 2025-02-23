@@ -65,6 +65,9 @@ jobs:
             echo "bun.lockb does not exist. Skipping commit."
           fi
 
+      - name: Repository name
+        run: echo "VITE_BASE_PATH=/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+
       - name: Build project
         run: bun run build && touch ./dist/.nojekyll #⚡Adjust to your build output folder (dist or out)
 
